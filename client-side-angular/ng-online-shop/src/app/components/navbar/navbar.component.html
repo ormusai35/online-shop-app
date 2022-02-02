@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink='' routerLinkActive="active">O</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/products' routerLinkActive="active">Products</a>
+      </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink='/shoppingcart' routerLinkActive="active">Shopping Cart</a>
+        </li>
+         <li *ngIf="!userService.isUserLoginIn()" class="nav-item">
+            <a class="nav-link" routerLink='/login' routerLinkActive="active">Login</a>
+        </li> 
+       <!--  <li *ngIf="UserService.isUserLoginIn()" ngbDropdown class="nav-item dropdown">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ UserService.getUserName() }}
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink='/myorders'>My Orders</a>
+            <a *ngIf="UserService.isUserAdmin()" class="dropdown-item" routerLink='/admin/orders'>Manage Orders</a>
+            <a *ngIf="UserService.isUserAdmin()" class="dropdown-item" routerLink='/admin/products'>Manage Products</a>
+            <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Log Out</a>
+          </div>
+        </li> -->
+      </ul>
+    </div>
+  </nav>

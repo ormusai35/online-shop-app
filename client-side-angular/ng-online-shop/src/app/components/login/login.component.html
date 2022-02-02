@@ -1,0 +1,37 @@
+<form #loginForm=ngForm (ngSubmit)="!loginForm.invalid && loginBt()" class="login-form">
+    <div class="form-group" >
+      <label>Email address</label>
+      <input 
+            type="email" 
+            class="form-control" 
+            id="login-in-email"
+            [(ngModel)]="authUser.email"
+            name="email" 
+            required
+            aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input 
+        type="password" 
+        class="form-control" 
+        id="login-in-pass"
+        [(ngModel)]="authUser.password"
+        name="password" 
+        required
+        >
+    </div>
+    <div *ngIf="!invalidLogin" class="alert alert-danger">wrong email or password</div>
+    <button style="margin-bottom:10px" class="form-group" type="submit" class="btn btn-primary">Login</button>
+    <div class="form-group" style="margin-top:10px">
+      <div class="col-md-120 control">
+          <div style="font-size:85%" >
+              Don't have an account! 
+          <a routerLink="signup">
+              Sign Up Here
+          </a>
+          </div>
+      </div>
+  </div>
+  </form>
+
