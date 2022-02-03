@@ -7,17 +7,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './components/login/login.component';
 import { UserService } from './services/user.service';
 import { ErrorComponent } from './components/error/error.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component'
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
 
 
 
 
 const appRoutes:Routes = [
-  {path:'',component:HomeComponent},
+  {path:'',component:HomePageComponent},
   // {path:'shoppingcart',component:ShppoingcartComponent},
   // {path:'products',component:ProductsComponent},
   // {path:'myorders',component:MyordersComponent, canActivate:[RouteguardService]},
@@ -35,10 +36,11 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent,
     LoginComponent,
     ErrorComponent,
-    SignUpComponent
+    SignUpComponent,
+    HomePageComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,

@@ -13,14 +13,15 @@
          <li *ngIf="!userService.isUserLoginIn()" class="nav-item">
             <a class="nav-link" routerLink='/login' routerLinkActive="active">Login</a>
         </li> 
-       <!--  <li *ngIf="UserService.isUserLoginIn()" ngbDropdown class="nav-item dropdown">
+        <li *ngIf="userService.isUserLoginIn()" ngbDropdown class="nav-item dropdown">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ UserService.getUserName() }}
+            {{ userService.getUserName() }}
           </a>
-          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        </li>
+      <!--     <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" routerLink='/myorders'>My Orders</a>
-            <a *ngIf="UserService.isUserAdmin()" class="dropdown-item" routerLink='/admin/orders'>Manage Orders</a>
-            <a *ngIf="UserService.isUserAdmin()" class="dropdown-item" routerLink='/admin/products'>Manage Products</a>
+            <a *ngIf="userService.isUserAdmin()" class="dropdown-item" routerLink='/admin/orders'>Manage Orders</a>
+            <a *ngIf="userService.isUserAdmin()" class="dropdown-item" routerLink='/admin/products'>Manage Products</a>
             <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Log Out</a>
           </div>
         </li> -->

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { IUser } from '../login/IUser';
+
 import { Router } from '@angular/router';
+import { IUser } from 'src/app/models/IUser.interface';
 
 @Component({
   selector: 'app-sign-up',
@@ -43,14 +44,5 @@ export class SignUpComponent implements OnInit {
     //   }
     // );
   }
-
-  getMessage(){
-    return this.userService.getMes().subscribe(
-      data =>{
-          this.message = data.mes;
-      })
-  }
-
-
 
 }
