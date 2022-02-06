@@ -2,3 +2,7 @@
 .login-form {
     width: 400px;
 }
+
+.error {
+    color: red;
+}

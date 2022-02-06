@@ -24,4 +24,29 @@ public class UserServiceImpl implements UserService{
 		return userRepository.findAll();
 	}
 
+//	@Override
+//	public User checkPassword(String email, String password) 
+//			throws AuthenticationException{
+//		User user = this.userRepository.findByEmail(email);
+//		if (user != null && user.getPassword().equals(password)) return user;
+//		else throw new AuthenticationException("Bad Request!");
+//	}
+	
+	@Override
+	public User checkPassword(String email, String password){
+		User user = this.userRepository.findByEmail(email);
+		if (user != null && user.getPassword().equals(password)) return user;
+		else return null;
+	}
+
+	@Override
+	public User insertUser(User user){
+		if(this.userRepository.existsById(user.getId())) return null;
+		else {
+			return this.userRepository.save(user);
+		}
+	}
+
+	
+
 }

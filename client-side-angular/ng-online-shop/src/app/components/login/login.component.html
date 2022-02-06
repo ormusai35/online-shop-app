@@ -2,13 +2,16 @@
     <div class="form-group" >
       <label>Email address</label>
       <input 
-            type="email" 
-            class="form-control" 
-            id="login-in-email"
-            [(ngModel)]="authUser.email"
-            name="email" 
-            required
-            aria-describedby="emailHelp">
+        type="email" 
+        class="form-control" 
+        id="login-in-email"
+        [(ngModel)]="authUser.email"
+        name="email" 
+        required
+        aria-describedby="emailHelp">
+        <div class="error" *ngIf="loginForm.submitted && loginForm.controls.email?.invalid">
+            <span>Email Is Required</span>
+        </div>
     </div>
     <div class="form-group">
       <label>Password</label>
@@ -20,18 +23,21 @@
         name="password" 
         required
         >
+        <div class="error" *ngIf="loginForm.submitted && loginForm.controls.password?.invalid">
+            <span>Password Is Required</span>
+        </div>
     </div>
-    <div *ngIf="!invalidLogin" class="alert alert-danger">wrong email or password</div>
+    <div *ngIf="!invalidLogin" class="alert alert-danger">Wrong Email Or Password</div>
     <button style="margin-bottom:10px" class="form-group" type="submit" class="btn btn-primary">Login</button>
     <div class="form-group" style="margin-top:10px">
-      <div class="col-md-120 control">
-          <div style="font-size:85%" >
-              Don't have an account! 
-          <a routerLink="signup">
-              Sign Up Here
-          </a>
-          </div>
-      </div>
-  </div>
+        <div class="col-md-120 control">
+            <div style="font-size:85%" >
+                Don't have an account?
+            <a routerLink="signup">
+                Sign Up Here
+            </a>
+            </div>
+        </div>
+    </div>
   </form>
 

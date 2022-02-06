@@ -22,20 +22,26 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.invalidLogin = true;
+    this.userService.getMes().subscribe(response => {
+      console.log(response.mes)
+    })
   }
 
   loginBt(){
-    // this.userService.checkUserExistence(this.authUser.email,this.authUser.password).subscribe(
-    //   data => {
-    //     if (data != null) {
-    //       this.UserService.setUser(data);
-    //       sessionStorage.setItem('authenticaterUser',data.userName);
-    //       this.invalidLogin = true;
-    //       this.router.navigate(['']);
-    //     } 
-    //     else this.invalidLogin = false;
-    //   }
-    // );
+    this.userService.login(this.authUser.email,this.authUser.password).subscribe(
+      data => {
+        if (data != null) {
+          this.userService.setUser(data);
+          // sessionStorage.setItem('authenticaterUser',data.userName);
+          this.invalidLogin = true;
+          this.router.navigate(['']);
+          console.log(data)
+        } 
+        else this.invalidLogin = false;
+      }
+    );
   }
+
+
 
 }

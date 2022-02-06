@@ -30,19 +30,19 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp(){
-    // this.userService.insertNewUser(this.sigunUpUser).subscribe(
-    //   data => {
-    //     if (data != null){
-    //       this.userService.setUser(data);
-    //       sessionStorage.setItem('authenticaterUser',data.userName);
-    //       this.invalidLogin = true;
-    //       this.router.navigate(['']);
-    //     }
-    //     else {
-    //       this.invalidLogin = false;
-    //     }
-    //   }
-    // );
+    this.userService.signUp(this.sigunUpUser).subscribe(
+      data => {
+        if (data != null){
+          this.userService.setUser(data);
+          // sessionStorage.setItem('authenticaterUser',data.userName);
+          this.invalidLogin = true;
+          this.router.navigate(['']);
+        }
+        else {
+          this.invalidLogin = false;
+        }
+      }
+    );
   }
 
 }
