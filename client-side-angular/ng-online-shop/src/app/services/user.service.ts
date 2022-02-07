@@ -28,12 +28,12 @@ export class UserService {
     return this.http.get<IUser[]>(this.path + "get-users");
   }
 
-  login(email: string, password: string): Observable<IUser> {
+  login1(email: string, password: string): Observable<IUser> {
     let queryParams = new HttpParams();
     queryParams = queryParams.append("email",email);
     queryParams = queryParams.append("password",password);
 
-    const uri = this.path + "check-user-auth";
+    const uri = this.path + "log-user";
     return this.http.get<IUser>(uri, {params: queryParams});
   }
 
@@ -46,12 +46,8 @@ export class UserService {
   }
 
   signUp(newUser: IUser): Observable<IUser> {
-    const uri: string = this.path + 'add-user'; 
+    const uri: string = this.path + 'user-sign-up'; 
     return this.http.post<IUser>(uri,newUser);
-  }
-
-  getMes(): Observable<{mes: string}> {
-    return this.http.get<{mes: string}>("http://localhost:8081/test");
   }
 }
  

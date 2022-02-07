@@ -2,8 +2,6 @@ package serverapp.onlineshop.controller;
 
 import java.util.List;
 
-import javax.naming.AuthenticationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import serverapp.onlineshop.exception.UserAlreadyExistsException;
+
 import serverapp.onlineshop.model.User;
 import serverapp.onlineshop.service.UserService;
 
-
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="http://localhost:4200/")
 @RestController 
 public class UserController {
 	
@@ -35,17 +32,29 @@ public class UserController {
 		return this.userService.getUsers();
 	}
 	
-	@GetMapping(path = "/login")
-	public ResponseEntity<User> login(@RequestParam String email, @RequestParam String password){
+	
+
+	@GetMapping(path="log-user")
+	public ResponseEntity<User> loginUser(@RequestParam String email, @RequestParam String password) {
 		try {			
-//			return ResponseEntity.ok(this.userService.checkPassword(email,password));
 			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.OK);
 		} catch(Exception  e) {
 			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-	@PostMapping(path = "sign-up")
+	
+	@GetMapping(path="check-user")
+	public ResponseEntity<User> getUser(@RequestParam String email, @RequestParam String password) {
+		try {			
+			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.OK);
+		} catch(Exception  e) {
+			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
+	@PostMapping(path = "user-sign-up")
 	public ResponseEntity<User> signUp(@RequestBody User user) {
 		try {
 			return ResponseEntity.ok(this.userService.insertUser(user));
@@ -54,12 +63,33 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping(path="test")
-	public ResponseEntity<Message> test() {
-		try {
-			return new ResponseEntity<Message>(new Message(),HttpStatus.OK);
-		} catch(Exception e) {
-			return new ResponseEntity<Message>(new Message(),HttpStatus.BAD_REQUEST);
-		}
-	}
+//	@GetMapping(path = "/login")
+//	public User login(@RequestParam String email, @RequestParam String password){
+//		
+//		return this.userService.checkPassword(email,password);
+//		try {			
+////			return ResponseEntity.ok(this.userService.checkPassword(email,password));
+//			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.OK);
+//		} catch(Exception  e) {
+//			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.BAD_REQUEST);
+//		}
+//	}
+	
+//	@PostMapping(path = "sign-up")
+//	public ResponseEntity<User> signUp(@RequestBody User user) {
+//		try {
+//			return ResponseEntity.ok(this.userService.insertUser(user));
+//		} catch(Exception e) {
+//			return ResponseEntity.badRequest().build();
+//		}
+//	}
+	
+//	@GetMapping(path="test")
+//	public ResponseEntity<Message> test() {
+//		try {
+//			return new ResponseEntity<Message>(new Message(),HttpStatus.OK);
+//		} catch(Exception e) {
+//			return new ResponseEntity<Message>(new Message(),HttpStatus.BAD_REQUEST);
+//		}
+//	}
 }

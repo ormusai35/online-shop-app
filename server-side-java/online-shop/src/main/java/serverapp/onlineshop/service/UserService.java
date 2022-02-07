@@ -10,5 +10,5 @@ public interface UserService {
 
 	User checkPassword(String email, String password);
 
-	User insertUser(User user); 
+	User insertUser(User user);
 }
