@@ -25,11 +25,11 @@ export class LoginComponent implements OnInit {
   }
 
   loginBt(){
-    this.userService.login1(this.authUser.email,this.authUser.password).subscribe(
+    this.userService.login(this.authUser.email,this.authUser.password).subscribe(
       data => {
         if (data != null) {
           this.userService.setUser(data);
-          // sessionStorage.setItem('authenticaterUser',data.userName);
+          sessionStorage.setItem('authenticaterUser',data.userName);
           this.invalidLogin = true;
           this.router.navigate(['']);
         } 
@@ -37,7 +37,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-
-
 }

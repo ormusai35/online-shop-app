@@ -44,14 +44,14 @@ public class UserController {
 	}
 	
 	
-	@GetMapping(path="check-user")
-	public ResponseEntity<User> getUser(@RequestParam String email, @RequestParam String password) {
-		try {			
-			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.OK);
-		} catch(Exception  e) {
-			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.BAD_REQUEST);
-		}
-	}
+//	@GetMapping(path="check-user")
+//	public ResponseEntity<User> getUser(@RequestParam String email, @RequestParam String password) {
+//		try {			
+//			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.OK);
+//		} catch(Exception  e) {
+//			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.BAD_REQUEST);
+//		}
+//	}
 	
 	
 	@PostMapping(path = "user-sign-up")
@@ -62,34 +62,4 @@ public class UserController {
 			return ResponseEntity.badRequest().build();
 		}
 	}
-	
-//	@GetMapping(path = "/login")
-//	public User login(@RequestParam String email, @RequestParam String password){
-//		
-//		return this.userService.checkPassword(email,password);
-//		try {			
-////			return ResponseEntity.ok(this.userService.checkPassword(email,password));
-//			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.OK);
-//		} catch(Exception  e) {
-//			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.BAD_REQUEST);
-//		}
-//	}
-	
-//	@PostMapping(path = "sign-up")
-//	public ResponseEntity<User> signUp(@RequestBody User user) {
-//		try {
-//			return ResponseEntity.ok(this.userService.insertUser(user));
-//		} catch(Exception e) {
-//			return ResponseEntity.badRequest().build();
-//		}
-//	}
-	
-//	@GetMapping(path="test")
-//	public ResponseEntity<Message> test() {
-//		try {
-//			return new ResponseEntity<Message>(new Message(),HttpStatus.OK);
-//		} catch(Exception e) {
-//			return new ResponseEntity<Message>(new Message(),HttpStatus.BAD_REQUEST);
-//		}
-//	}
 }

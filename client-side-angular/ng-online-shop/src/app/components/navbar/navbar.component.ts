@@ -12,10 +12,10 @@ export class NavbarComponent implements OnInit {
   constructor(public userService:UserService, private router:Router) { 
   }
 
-  // logout() {
-  //   sessionStorage.clear();
-  //   this.router.navigate(['']);
-  // }
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['']);
+  }
 
   ngOnInit(): void {
   }

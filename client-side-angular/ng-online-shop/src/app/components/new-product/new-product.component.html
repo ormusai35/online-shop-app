@@ -1,1 +1,54 @@
-
+<!-- 
+<div class="row" style="height: max-content;">
+    <div class="col-md-6">
+        <form [formGroup]="formValidate" (ngSubmit)="!formValidate.invalid && saveProduct(formValidate)">
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input [(ngModel)]="product.description" formControlName="description" id ="description" type="text" class="form-control" required>
+                <div class="alert alert-danger" *ngIf="description.touched && description.invalid">Description is required.</div>   
+            </div>
+        
+            <div class="form-group">
+                <label for="price">Price</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input [(ngModel)]="product.price" formControlName="price" id ="price" type="number" class="form-control" required>
+                </div>
+                <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+                    <div *ngIf="price.errors.required">Price Is Required</div>
+                    <div *ngIf="price.errors.minPrice">Must Insert Positive Number</div>
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select [(ngModel)]="product.category" formControlName="category" id="category" class="form-control" required> 
+                    <option value=""></option>
+                    <option *ngFor="let c of prodService.getCategories()">{{ c }}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="category.touched && category.invalid">Category is required.</div>
+            </div>
+        
+            <div class="form-group">
+                <label for="imageUrl">Image URL</label>
+                <input [(ngModel)]="product.imageUrl" formControlName="imageUrl" id ="imageUrl" type="text" class="form-control" required>
+                <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+                    <div *ngIf="imageUrl.errors.required">Url is required</div>
+                    <div *ngIf="imageUrl.errors.pattern">must insert a valid Url</div> 
+                </div>
+            </div>
+        
+            <button class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    <div class="col-md-6" style="height: inherit;">
+        <div class="card" style="width: 18rem;">
+            <img *ngIf="imageUrl.invalid" id="card-img" class="card-img-top" src="https://bluecirculareconomy.eu/wp-content/themes/unbound/images/No-Image-Found-400x264.png">
+            <img *ngIf="!imageUrl.invalid && product.imageUrl != ''" id="card-img" class="card-img-top" src="{{product.imageUrl}}">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.description }}</h5>
+              <p class="card-text">{{ product.price | currency:'USD':'symbol'}}</p>
+            </div>
+        </div>
+    </div>
+</div> -->

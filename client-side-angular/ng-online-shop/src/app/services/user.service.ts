@@ -20,15 +20,19 @@ export class UserService {
 
   constructor(public http: HttpClient) { }
 
-  isUserLoginIn(): boolean {
-    return false;
+  isUserLogin(): boolean {
+    return (sessionStorage.getItem('authenticaterUser') != null);
+  }
+
+  isUserAdmin(): boolean {
+    return true;
   }
 
   getUsers(): Observable<IUser[]> {
     return this.http.get<IUser[]>(this.path + "get-users");
   }
 
-  login1(email: string, password: string): Observable<IUser> {
+  login(email: string, password: string): Observable<IUser> {
     let queryParams = new HttpParams();
     queryParams = queryParams.append("email",email);
     queryParams = queryParams.append("password",password);
