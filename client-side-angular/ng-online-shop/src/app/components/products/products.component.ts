@@ -13,18 +13,19 @@ export class ProductsComponent implements OnInit {
   filteredProducts: IProduct[] = [];
 
   ngOnInit(): void {
+    this.productsService.getAllProducts().subscribe(
+      data => this.filteredProducts = this.products = data
+    );
   }
 
   constructor(private productsService: ProductsService) { 
-    // productsService.getAll().subscribe(
-    //   data => this.filteredProducts = this.products = data
-    // );
+    
   }
  
 
-  // filterByCategory(category){
-  //   this.filteredProducts = (category != 'All') ? this.products.filter(p => p.category === category)
-  //   : this.products;
-  // }
+  filterByCategory(category: string){
+    this.filteredProducts = (category != 'ALL') ? this.products.filter(p => p.category === category)
+    : this.products;
+  }
 
 }

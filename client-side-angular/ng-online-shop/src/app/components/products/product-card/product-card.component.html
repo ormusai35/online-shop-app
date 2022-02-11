@@ -1,0 +1,33 @@
+            <!-- Card -->
+            <div class="card booking-card" style="max-width: 255px;">
+
+                <!-- Card image -->
+                <div class="view overlay" >
+                    <img *ngIf="product.imageUrl != ''" id="img-card" class="card-img-top" [src]="product.imageUrl"
+                        alt="Card image cap">
+                    <img *ngIf="product.imageUrl === ''" id="img-card" class="card-img-top" src="https://bluecirculareconomy.eu/wp-content/themes/unbound/images/No-Image-Found-400x264.png"
+                        alt="Card image cap">
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <!-- Card content -->
+                <div class="card-body">
+
+                    <!-- Title -->
+                    <h4 class="card-title font-weight-bold"><a>{{ product.description }}</a></h4>
+                    <!-- Data -->
+                    <!-- Price -->
+                    <p style="text-align: center;;" class="card-text">{{ product.price | currency:'USD':'symbol'}}</p>
+                    <!-- <p class="mb-2">{{ product.category }}</p> -->
+                    <!-- Text -->
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                        content.</p> -->
+                    <!-- Button -->
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-secondary btn-rounded btn-block" (click)="addToCart(product)">Add To Cart</button>
+                </div>
+
+            </div>
+            <!-- Card -->

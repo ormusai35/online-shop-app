@@ -1,1 +1,6 @@
-<p>product-filter works!</p>
+
+  <ul class="nav nav-pills nav-fill"> 
+    <li *ngFor="let category of categories" class="nav-item my-type">
+        <button (click)="onPushType(category)" type="button" class="btn btn-dark list-group-item list-group-item-action active">{{ category }}</button>
+    </li>
+  </ul>

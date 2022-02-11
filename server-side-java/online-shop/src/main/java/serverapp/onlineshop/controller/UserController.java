@@ -31,8 +31,6 @@ public class UserController {
 	public List<User> getHello() {
 		return this.userService.getUsers();
 	}
-	
-	
 
 	@GetMapping(path="log-user")
 	public ResponseEntity<User> loginUser(@RequestParam String email, @RequestParam String password) {
@@ -42,17 +40,6 @@ public class UserController {
 			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	
-//	@GetMapping(path="check-user")
-//	public ResponseEntity<User> getUser(@RequestParam String email, @RequestParam String password) {
-//		try {			
-//			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.OK);
-//		} catch(Exception  e) {
-//			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.BAD_REQUEST);
-//		}
-//	}
-	
 	
 	@PostMapping(path = "user-sign-up")
 	public ResponseEntity<User> signUp(@RequestBody User user) {
