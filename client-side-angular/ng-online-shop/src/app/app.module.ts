@@ -23,11 +23,7 @@ import { ProductsService } from './services/products.service';
 import { ProductFilterComponent } from './components/products/product-filter/product-filter.component';
 import { ProductCardComponent } from './components/products/product-card/product-card.component';
 import { CartService } from './services/cart.service';
-
-
-
-
-
+import { FooterComponent } from './components/footer/footer.component';
 
 const appRoutes:Routes = [
   {path:'',component:HomePageComponent},
@@ -60,15 +56,16 @@ const appRoutes:Routes = [
     ProductsComponent,
     ShoppingCartComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    HttpClientModule
-    // ,ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
+    HttpClientModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [UserService,ProductsService,CartService],
   bootstrap: [AppComponent]

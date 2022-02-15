@@ -2,17 +2,21 @@ package serverapp.onlineshop.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import serverapp.onlineshop.exception.UserNotFoundException;
 import serverapp.onlineshop.model.User;
 import serverapp.onlineshop.service.UserService;
 
@@ -41,6 +45,11 @@ public class UserController {
 		}
 	}
 	
+//	@GetMapping(path="test-error")
+//	public ResponseEntity<User> testError(@RequestParam String email, @RequestParam String password) {
+//		return new ResponseEntity<User>(this.userService.checkPassword1(email,password),HttpStatus.OK);
+//	}
+	
 	@PostMapping(path = "user-sign-up")
 	public ResponseEntity<User> signUp(@RequestBody User user) {
 		try {
@@ -48,5 +57,13 @@ public class UserController {
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();
 		}
+	}
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	public String handleNotFoundUserException(Model model, UserNotFoundException exception, HttpServletRequest request) {
+		model.addAttribute("exception", exception);
+		model.addAttribute("url", request.getRequestURL());
+		
+		return exception.getMessage();
 	}
 }

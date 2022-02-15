@@ -11,10 +11,10 @@ export class UserService {
   private path: string = "http://localhost:8081/";
 
   currentUser: IUser = {
-    id: 456,
-    userName: "hadas",
-    email: "hadas@gmail.com",
-    password: "AAAA",
+    id: 0,
+    userName: "",
+    email: "",
+    password: "",
     isAdmin: false
   }
 

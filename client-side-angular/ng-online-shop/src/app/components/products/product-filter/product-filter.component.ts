@@ -10,15 +10,13 @@ export class ProductFilterComponent implements OnInit {
 
   @Output() categoryFilter: EventEmitter<string> = new EventEmitter<string>();
 
-  categories: string[] = ["ALL","COATS & JACKETS","JEANS","SHIRTS"];
+  constructor(public productService: ProductsService) { }
+
+  ngOnInit(): void {
+  }
 
   onPushType(category: string) {
     this.categoryFilter.emit(category);
-  }
-
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
 }

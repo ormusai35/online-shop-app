@@ -11,4 +11,6 @@ public interface UserService {
 	User checkPassword(String email, String password);
 
 	User insertUser(User user);
+
+//	User checkPassword1(String email, String password);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import serverapp.onlineshop.exception.UserNotFoundException;
 import serverapp.onlineshop.model.User;
 import serverapp.onlineshop.repository.UserRepository;
 import serverapp.onlineshop.service.UserService;
@@ -38,6 +39,14 @@ public class UserServiceImpl implements UserService{
 			return this.userRepository.save(user);
 		}
 	}
+
+//	@Override
+//	public User checkPassword1(String email, String password) {
+//		User user = this.userRepository.findByEmail(email);
+//		if(user == null) throw new UserNotFoundException(email + " Not Exists");  
+//		if (user.getPassword().equals(password)) return user;
+//		else return null;
+//	}
 
 	
 
