@@ -14,6 +14,10 @@ export class ProductsService {
 
   constructor(private http:HttpClient){}
 
+  getCategories() :string[] {
+    return this.categories;
+  }
+
   getAllProducts(): Observable<IProduct[]>{
     let uri: string = this.path + "products";
     return this.http.get<IProduct[]>(uri);
@@ -30,13 +34,8 @@ export class ProductsService {
   }
 
   getProduct(id: string) {
-    let uri = this.path + "get-product";
+    let uri = this.path + `get-product/${id}`;
     return this.http.get<IProduct>(uri);
-
-  }
-
-  getCategories() :string[] {
-    return this.categories;
   }
 
 }

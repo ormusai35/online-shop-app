@@ -22,6 +22,9 @@ public class User {
 	@Column(name = "password") 
 	private String password;
 	
+	@Column(name = "is_admin") 
+	private boolean isAdmin;
+	
 	public long getId() {
 		return id;
 	}
@@ -34,9 +37,12 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
+	public boolean getIsAdmin() {
+		return isAdmin;
+	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password + "]";
+		return "User [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password
+				+ ", isAdmin=" + isAdmin + "]";
 	}
-	
 }

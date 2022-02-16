@@ -45,11 +45,6 @@ public class UserController {
 		}
 	}
 	
-//	@GetMapping(path="test-error")
-//	public ResponseEntity<User> testError(@RequestParam String email, @RequestParam String password) {
-//		return new ResponseEntity<User>(this.userService.checkPassword1(email,password),HttpStatus.OK);
-//	}
-	
 	@PostMapping(path = "user-sign-up")
 	public ResponseEntity<User> signUp(@RequestBody User user) {
 		try {

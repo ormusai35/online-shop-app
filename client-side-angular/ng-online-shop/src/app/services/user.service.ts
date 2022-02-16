@@ -18,6 +18,8 @@ export class UserService {
     isAdmin: false
   }
 
+  admins = new Set<string>(["ormusai35@gmail.com"]);
+
   constructor(public http: HttpClient) { }
 
   isUserLogin(): boolean {
@@ -25,7 +27,7 @@ export class UserService {
   }
 
   isUserAdmin(): boolean {
-    return true;
+    return this.currentUser.isAdmin;
   }
 
   getUsers(): Observable<IUser[]> {
@@ -50,8 +52,15 @@ export class UserService {
   }
 
   signUp(newUser: IUser): Observable<IUser> {
+    this.checkAdmin(newUser);
     const uri: string = this.path + 'user-sign-up'; 
     return this.http.post<IUser>(uri,newUser);
   }
+
+  checkAdmin(newUser: IUser) :void{
+    if(this.admins.has(newUser.email)) newUser.isAdmin = true;
+  } 
 }
+
+ 
  

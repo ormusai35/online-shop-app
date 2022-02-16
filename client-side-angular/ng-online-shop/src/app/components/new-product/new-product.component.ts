@@ -25,9 +25,10 @@ export class NewProductComponent implements OnInit {
     price: new FormControl('',[Validators.required, ProductValidator.minPrice]),
     category: new FormControl('',Validators.required),
     imageUrl: new FormControl('',[
-      Validators.required,
-      Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
-      ,Validators.email
+      Validators.required
+      ,
+      // Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')
+      Validators.pattern('https?://.+')
     ])
   })
 
@@ -36,9 +37,8 @@ export class NewProductComponent implements OnInit {
     private router:Router,
     private route: ActivatedRoute) {
     let id = this.route.snapshot.paramMap.get('id');
+    console.log(id)
     if (id) this.prodService.getProduct(id).subscribe(data => this.product = data);
-
-    console.log(this.formValidate)
   }
 
 
@@ -53,7 +53,6 @@ export class NewProductComponent implements OnInit {
           data => {
             formProduct.reset();
             if(data){
-              
             }
           } 
           //this.router.navigate([''])
@@ -62,6 +61,7 @@ export class NewProductComponent implements OnInit {
     }
       else {
         this.prodService.updateProduct(this.product).subscribe();
+        formProduct.reset();
       }
 
   }

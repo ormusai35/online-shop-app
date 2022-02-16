@@ -4,10 +4,10 @@
         <li class="nav-item">
           <a class="nav-link" routerLink='' routerLinkActive="active">O</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!userService.isUserAdmin()">
           <a class="nav-link" routerLink='/products' routerLinkActive="active">Products</a>
       </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!userService.isUserAdmin()">
             <a class="nav-link" routerLink='/shoppingcart' routerLinkActive="active">Shopping Cart</a>
         </li>
          <li *ngIf="!userService.isUserLogin()" class="nav-item">
