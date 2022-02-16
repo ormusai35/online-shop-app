@@ -30,6 +30,16 @@ export class UserService {
     return this.currentUser.isAdmin;
   }
 
+  resetUser() {
+    this.currentUser = {
+      id: 0,
+      userName: "",
+      email: "",
+      password: "",
+      isAdmin: false
+    }
+  }
+
   getUsers(): Observable<IUser[]> {
     return this.http.get<IUser[]>(this.path + "get-users");
   }

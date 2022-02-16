@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     sessionStorage.clear();
+    this.userService.resetUser();
     this.router.navigate(['']);
   }
 
