@@ -1,0 +1,24 @@
+2022-02-23 12:34:10.023  INFO 25264 --- [restartedMain] s.onlineshop.OnlineShopApplication       : Starting OnlineShopApplication using Java 1.8.0_41 on ILLT-PF1HSDVL with PID 25264 (C:\Users\or.musai\OneDrive - Sapiens\Desktop\אור מוסאי - קבצים\PROJECTS\Angular\online-shop-app\server-side-java\online-shop\target\classes started by Or.Musai in C:\Users\or.musai\OneDrive - Sapiens\Desktop\אור מוסאי - קבצים\PROJECTS\Angular\online-shop-app\server-side-java\online-shop)
+2022-02-23 12:34:10.034  INFO 25264 --- [restartedMain] s.onlineshop.OnlineShopApplication       : No active profile set, falling back to default profiles: default
+2022-02-23 12:34:10.117  INFO 25264 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-02-23 12:34:10.117  INFO 25264 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-02-23 12:34:10.850  INFO 25264 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-23 12:34:10.921  INFO 25264 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57 ms. Found 2 JPA repository interfaces.
+2022-02-23 12:34:12.818  INFO 25264 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2022-02-23 12:34:12.830  INFO 25264 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-02-23 12:34:12.830  INFO 25264 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-23 12:34:12.931  INFO 25264 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-02-23 12:34:12.931  INFO 25264 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2813 ms
+2022-02-23 12:34:12.965  INFO 25264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-02-23 12:34:13.192  INFO 25264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-02-23 12:34:13.202  INFO 25264 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2022-02-23 12:34:13.389  INFO 25264 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-02-23 12:34:13.456  INFO 25264 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.4.Final
+2022-02-23 12:34:13.681  INFO 25264 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-02-23 12:34:13.827  INFO 25264 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-02-23 12:34:14.571  INFO 25264 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-02-23 12:34:14.580  INFO 25264 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-23 12:34:14.998  WARN 25264 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-23 12:34:15.328  INFO 25264 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-02-23 12:34:15.376  INFO 25264 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2022-02-23 12:34:15.386  INFO 25264 --- [restartedMain] s.onlineshop.OnlineShopApplication       : Started OnlineShopApplication in 5.81 seconds (JVM running for 6.358)

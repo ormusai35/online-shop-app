@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HTTP_URI } from '../components/constants/app.constants';
 import { IProduct } from '../models/IProduct.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-
-  private path: string = "http://localhost:8081/";
 
   categories: string[] = ["ALL","COATS & JACKETS","JEANS","SHIRTS"];
 
@@ -19,22 +18,22 @@ export class ProductsService {
   }
 
   getAllProducts(): Observable<IProduct[]>{
-    let uri: string = this.path + "products";
+    let uri: string = HTTP_URI + "products";
     return this.http.get<IProduct[]>(uri);
   }
 
   updateProduct(product: IProduct): Observable<IProduct>{
-    let uri = this.path + "update-product";
+    let uri = HTTP_URI + "update-product";
     return this.http.put<IProduct>(uri, product);
   }
 
   createProduct(product: IProduct): Observable<IProduct>{
-    let uri = this.path + "insert-new-product";
+    let uri = HTTP_URI + "insert-new-product";
     return this.http.post<IProduct>(uri, product);
   }
 
   getProduct(id: string) {
-    let uri = this.path + `get-product/${id}`;
+    let uri = HTTP_URI + `get-product/${id}`;
     return this.http.get<IProduct>(uri);
   }
 

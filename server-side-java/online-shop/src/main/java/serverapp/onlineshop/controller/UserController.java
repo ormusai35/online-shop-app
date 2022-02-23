@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,8 @@ import serverapp.onlineshop.service.UserService;
 @RestController 
 public class UserController {
 	
+	private static Logger LOG = LoggerFactory.getLogger(UserController.class);
+	
 	private UserService userService;
 	
 	@Autowired
@@ -32,7 +36,8 @@ public class UserController {
 	}
 
 	@GetMapping(path="get-users")
-	public List<User> getHello() {
+	public List<User> getUsers() {
+//		LOG.error("All users");
 		return this.userService.getUsers();
 	}
 
