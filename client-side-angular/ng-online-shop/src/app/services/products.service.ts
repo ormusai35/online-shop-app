@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HTTP_URI } from '../components/constants/app.constants';
+import { HTTP_URI } from '../constants/app.constants';
 import { IProduct } from '../models/IProduct.interface';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AUTHENTICATE_USER, HTTP_URI } from '../components/constants/app.constants';
+import { AUTHENTICATE_USER, HTTP_URI } from '../constants/app.constants';
 import { IUser } from '../models/IUser.interface';
 
 @Injectable({
@@ -54,6 +54,10 @@ export class UserService {
 
   getUserName(): string {
     return this.currentUser.userName;
+  }
+
+  getUser(): IUser {
+    return this.currentUser;
   }
 
   setUser(user: IUser): void {

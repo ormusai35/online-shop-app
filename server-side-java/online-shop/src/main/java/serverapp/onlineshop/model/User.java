@@ -1,9 +1,14 @@
 package serverapp.onlineshop.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class User {
@@ -25,6 +30,10 @@ public class User {
 	@Column(name = "is_admin") 
 	private boolean isAdmin;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false)
+	private Date timestamp;
+	
 	public long getId() {
 		return id;
 	}
@@ -40,6 +49,15 @@ public class User {
 	public boolean getIsAdmin() {
 		return isAdmin;
 	}
+	public Date getTimestamp() {
+		return timestamp;
+	}
+	
+	@PrePersist
+	private void onCreate() {
+	    timestamp = new Date();
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password

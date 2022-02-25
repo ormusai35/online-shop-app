@@ -19,9 +19,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   addToCart(product: IProduct){
-
-    // this.cartService.addProductToCart(product);
-    
+    this.cartService.addProductToCart(product,this.userService.getUser().id);    
   }
 
   updateProduct(product: IProduct){
