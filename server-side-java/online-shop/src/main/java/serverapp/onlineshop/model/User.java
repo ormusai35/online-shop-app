@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,6 +32,11 @@ public class User {
 	@Column(name = "is_admin") 
 	private boolean isAdmin;
 	
+	@OneToOne
+	@JoinColumn(name="cart_id")
+	private Cart cart;
+	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	private Date timestamp;
@@ -52,12 +59,18 @@ public class User {
 	public Date getTimestamp() {
 		return timestamp;
 	}
+
+	public Cart getCart() {
+		return cart;
+	}
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 	
 	@PrePersist
 	private void onCreate() {
 	    timestamp = new Date();
 	}
-	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password

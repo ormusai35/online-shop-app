@@ -1,19 +1,28 @@
 package serverapp.onlineshop.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cart")
-public class Cart{
+public class Cart implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@GeneratedValue
 	@Id
 	@Column(name = "cart_id")
@@ -22,12 +31,13 @@ public class Cart{
 	@OneToOne
 	private User user;
 	
-	@OneToMany(mappedBy = "cart")
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
 	@Column(name = "cart_lines")
 	private List<CartLine> cartLines;
 
-	@Column(name = "total_price")
-	private double totalPrice;
+	@Column(name = "total")
+	private double total;
 	
 	public Cart() {}
 	
@@ -53,10 +63,10 @@ public class Cart{
 	public void setCartLines(List<CartLine> cartLines) {
 		this.cartLines = cartLines;
 	}
-	public double getTotalPrice() {
-		return totalPrice;
+	public double getTotal() {
+		return total;
 	}
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setTotal(double total) {
+		this.total = total;
 	}
 }

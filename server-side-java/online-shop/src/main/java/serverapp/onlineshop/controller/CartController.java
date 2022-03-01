@@ -1,5 +1,6 @@
 package serverapp.onlineshop.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,13 @@ public class CartController {
 	private CartService cartService;
 	
 	@GetMapping(path="get-cart-by-user/{userId}")
-	public List<Cart> createCart(@PathVariable Long userId) {
+	public Collection<Cart> getOrCreateCart(@PathVariable Long userId) {
 		User user = this.userService.getUserById(userId);
-		return this.cartService.getCart(user);
+		return this.cartService.createCart(user);
+	}
+	
+	@GetMapping(path="get-cart/test")
+	public Cart getCart() {
+		return this.cartService.getCart();
 	}
 }

@@ -1,12 +1,13 @@
 package serverapp.onlineshop.service.impl;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import serverapp.onlineshop.model.Cart;
 import serverapp.onlineshop.model.User;
+import serverapp.onlineshop.repository.CartLineRepository;
 import serverapp.onlineshop.repository.CartRepository;
 import serverapp.onlineshop.service.CartService;
 
@@ -15,18 +16,25 @@ public class CartServiceImpl implements CartService{
 
 	@Autowired
 	private CartRepository cartRepository;
-
-//	@Override
-//	public Cart createCart() {
-//		Cart cart = new Cart();
-//		return this.cartRepository.save(cart);
-//	}
+	
+	@Autowired
+	private CartLineRepository cartLineRepository;
 
 	@Override
-	public List<Cart> getCart(User user) {
-		List<Cart> carts = this.cartRepository.findByUserId(user.getId());
-//		if(cart == null) cart = new Cart(user);
-		return carts;
+	public Cart getCart() {
+//		List<Cart> carts = this.cartRepository.findByUserId(user.getId());
+//		return carts;
+//		return this.cartRepository.findAllCartsByPrice();
+//		return this.cartRepository.findByTotal(50);
+		return this.cartRepository.findById(1L).get();
+	}
+
+	@Override
+	public Collection<Cart> createCart(User user) {
+//		Cart cart = this.cartRepository.findByUser(userId);
+//		return this.cartRepository.save(cart);
+		
+		return this.cartRepository.findByUser(user);
 	}
 	
 	
