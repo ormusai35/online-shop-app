@@ -19,7 +19,9 @@ export class ProductCardComponent implements OnInit {
   }
 
   addToCart(product: IProduct){
-    this.cartService.addProductToCart(product,this.userService.getUser().id);    
+    let cartId = this.cartService.addProductToCart(product,this.userService.getUser().id);
+    
+    // this.router.navigate(['shoppingcart',{id:this.cartId}])
   }
 
   updateProduct(product: IProduct){

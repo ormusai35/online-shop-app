@@ -69,4 +69,10 @@ public class Cart implements Serializable{
 	public void setTotal(double total) {
 		this.total = total;
 	}
+
+	@Override
+	public String toString() {
+		return "Cart [cartId=" + cartId + ", user=" + user + ", cartLines=" + cartLines + ", total=" + total + "]";
+	}
+	
 }

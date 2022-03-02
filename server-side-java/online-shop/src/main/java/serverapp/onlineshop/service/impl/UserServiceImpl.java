@@ -1,12 +1,10 @@
 package serverapp.onlineshop.service.impl;
 
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import serverapp.onlineshop.exception.UserNotFoundException;
 import serverapp.onlineshop.model.User;
 import serverapp.onlineshop.repository.UserRepository;
 import serverapp.onlineshop.service.UserService;
@@ -43,6 +41,13 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getUserById(long userId) {
-		return this.userRepository.getById(userId);
+		if(this.userRepository.existsById(userId)) 
+			return this.userRepository.findById(userId).get();
+		else return null;
+	}
+
+	@Override
+	public User updateUser(User user) {
+		return this.userRepository.save(user);
 	}
 }

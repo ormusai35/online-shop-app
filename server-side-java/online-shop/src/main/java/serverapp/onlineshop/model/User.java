@@ -1,5 +1,6 @@
 package serverapp.onlineshop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,9 +13,16 @@ import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class User {
+public class User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id") 
@@ -32,13 +40,14 @@ public class User {
 	@Column(name = "is_admin") 
 	private boolean isAdmin;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="cart_id")
 	private Cart cart;
 	
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private Date timestamp;
 	
 	public long getId() {

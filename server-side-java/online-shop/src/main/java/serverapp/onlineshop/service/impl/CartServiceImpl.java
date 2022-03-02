@@ -21,20 +21,16 @@ public class CartServiceImpl implements CartService{
 	private CartLineRepository cartLineRepository;
 
 	@Override
-	public Cart getCart() {
-//		List<Cart> carts = this.cartRepository.findByUserId(user.getId());
-//		return carts;
-//		return this.cartRepository.findAllCartsByPrice();
-//		return this.cartRepository.findByTotal(50);
-		return this.cartRepository.findById(1L).get();
+	public Cart createCart(User user) {
+		Cart cart;
+		if(user == null) cart = new Cart();
+		else cart = new Cart(user);
+		return this.cartRepository.save(cart);
 	}
 
 	@Override
-	public Collection<Cart> createCart(User user) {
-//		Cart cart = this.cartRepository.findByUser(userId);
-//		return this.cartRepository.save(cart);
-		
-		return this.cartRepository.findByUser(user);
+	public Cart getCart(Long cartId) {
+		return this.cartRepository.getById(cartId);
 	}
 	
 	

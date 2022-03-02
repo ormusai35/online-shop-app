@@ -8,8 +8,12 @@ import serverapp.onlineshop.model.User;
 
 public interface CartService {
 
-	Collection<Cart> createCart(User user);
+	Cart createCart(User user);
 
-	Cart getCart();
+	Cart getCart(Long cartId);
+
+//	Collection<Cart> getOrCreateCart(User user);
+//
+//	Cart getCart();
 	
 }

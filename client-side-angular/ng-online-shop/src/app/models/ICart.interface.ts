@@ -1,3 +1,7 @@
+import { IUser } from "./IUser.interface";
+
 export class ICart {
-    id: string;
+    cartId: number;
+    user:IUser;
+    total:number
 }

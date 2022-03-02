@@ -17,10 +17,11 @@ import org.springframework.core.serializer.Serializer;
 @Table(name = "cart_line")
 public class CartLine implements Serializable {
 	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2601046242834580948L;
+	private static final long serialVersionUID = 2L;
 
 	@Id
 	@Column(name="line_id")
