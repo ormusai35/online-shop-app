@@ -12,15 +12,14 @@ export class CartService {
 
   constructor(public http: HttpClient) { }
 
-  updateCart(cartId:any, productId:any, quantity: any) {
+  updateCart(cart:any, product:any, quantity: any) {
 
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("cartId",cartId);
-    queryParams = queryParams.append("productId",productId);
+    queryParams = queryParams.append("cartId",cart);
     queryParams = queryParams.append("quantity",quantity);
 
-    const uri = HTTP_URI + `update-cart/${productId}`;
-    return this.http.put<IProduct>(uri, {params: queryParams});
+    const uri = HTTP_URI + "update-cart";
+    return this.http.put<IProduct>(uri, product, {params: queryParams});
   }
 
   getOrCreateCart(userId: number) :Observable<ICart>{
@@ -28,8 +27,8 @@ export class CartService {
   }
 
   getCartId(userId: number) {
-    let temp = sessionStorage.getItem('cartId');
-    if(!temp){
+    let cartId = sessionStorage.getItem('cartId');
+    if(!cartId){
       this.getOrCreateCart(userId).subscribe(data => {
         sessionStorage.setItem('cartId',data.cartId.toString())
       },
@@ -39,10 +38,20 @@ export class CartService {
     }
   }
 
- addProductToCart(product: IProduct, userId: number) {
-    // let itemId = this.getItem(cartId, product.id);
-    // if(cartId) this.updateCart(cartId,product.id,1);
-    // else console.log("empty cart id")
+ addProductToCart(product: IProduct, userId: number) { 
+  let cartId = sessionStorage.getItem('cartId'); 
+  if(cartId){
+    this.updateCart(parseInt(cartId),product,1).subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+        console.log(error)
+      }
+      )
+  }
+    
+    
   }
 }
   

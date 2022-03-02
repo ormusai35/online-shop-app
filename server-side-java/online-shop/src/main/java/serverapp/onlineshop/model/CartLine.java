@@ -2,9 +2,11 @@ package serverapp.onlineshop.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.core.serializer.Serializer;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "cart_line")
@@ -23,6 +27,7 @@ public class CartLine implements Serializable {
 	 */
 	private static final long serialVersionUID = 2L;
 
+	@GeneratedValue
 	@Id
 	@Column(name="line_id")
 	private Long lineId;
@@ -31,14 +36,14 @@ public class CartLine implements Serializable {
 	@JoinColumn(name="cart_id")
 	private Cart cart;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Product product;
 
 	@Column(name = "product_count")
     private int productCount;
     
     public CartLine() {}
-	
+
 	public Long getLineId() {
 		return lineId;
 	}
@@ -70,4 +75,11 @@ public class CartLine implements Serializable {
 	public void setProductCount(int productCount) {
 		this.productCount = productCount;
 	}
+
+	@Override
+	public String toString() {
+		return "CartLine [lineId=" + lineId + ", cart=" + cart + ", product=" + product + ", productCount="
+				+ productCount + "]";
+	}
+	
 }

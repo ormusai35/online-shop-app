@@ -19,7 +19,10 @@ export class ProductsComponent implements OnInit {
     this.productsService.getAllProducts().subscribe(
       data => this.filteredProducts = this.products = data
     );
-    this.cartService.getCartId(this.userService.getUser().id);
+    if(this.userService.getUser().id > 0){
+      this.cartService.getCartId(this.userService.getUser().id);
+    }
+    
   }
 
   constructor(private productsService: ProductsService,
@@ -27,7 +30,6 @@ export class ProductsComponent implements OnInit {
               private userService:UserService) { 
     
   }
- 
 
   filterByCategory(category: string){
     this.filteredProducts = (category != 'ALL') ? this.products.filter(p => p.category === category)
