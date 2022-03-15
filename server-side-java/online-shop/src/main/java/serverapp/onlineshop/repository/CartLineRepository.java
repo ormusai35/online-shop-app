@@ -1,5 +1,6 @@
 package serverapp.onlineshop.repository;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,5 +16,10 @@ public interface CartLineRepository extends JpaRepository<CartLine, Long>{
 	
 	@Query(value = "SELECT * FROM CART_LINE u WHERE u.cart_id = ?1",nativeQuery = true)
 	List<CartLine> findCartLineByCartId(long cartId);
+	
+	@Query(value = "SELECT * FROM CART_LINE u WHERE u.quantity = ?1",nativeQuery = true)
+	List<CartLine> findCartLineByQuantity(int quantity);
+	
+	ArrayList<CartLine> findByQuantity(int quantity);
 
 }

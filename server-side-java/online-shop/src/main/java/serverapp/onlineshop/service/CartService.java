@@ -2,7 +2,6 @@ package serverapp.onlineshop.service;
 
 import serverapp.onlineshop.model.Cart;
 import serverapp.onlineshop.model.CartLine;
-import serverapp.onlineshop.model.Product;
 import serverapp.onlineshop.model.User;
 
 public interface CartService {
@@ -11,7 +10,9 @@ public interface CartService {
 
 	Cart getCart(Long cartId);
 
-	CartLine updateCart(long cartId, Product product, int quantity);
+	CartLine updateCart(long cartId, int quantity);
+
+	CartLine addCartLine(long id);
 
 //	Collection<Cart> getOrCreateCart(User user);
 //

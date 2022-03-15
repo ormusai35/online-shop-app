@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.core.serializer.Serializer;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -36,14 +34,19 @@ public class CartLine implements Serializable {
 	@JoinColumn(name="cart_id")
 	private Cart cart;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne
 	private Product product;
 
-	@Column(name = "product_count")
-    private int productCount;
+	@Column(name = "quantity")
+    private int quantity;
     
     public CartLine() {}
 
+    public CartLine(long lineId,int quantity) {
+    	this.lineId = lineId;
+    	this.quantity = quantity;
+    }
+    
 	public Long getLineId() {
 		return lineId;
 	}
@@ -68,18 +71,18 @@ public class CartLine implements Serializable {
 		this.product = product;
 	}
 
-	public int getProductCount() {
-		return productCount;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setProductCount(int productCount) {
-		this.productCount = productCount;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	@Override
 	public String toString() {
-		return "CartLine [lineId=" + lineId + ", cart=" + cart + ", product=" + product + ", productCount="
-				+ productCount + "]";
+		return "CartLine [lineId=" + lineId + ", cart=" + cart + ", product=" + product + ", quantity="
+				+ quantity + "]";
 	}
 	
 }

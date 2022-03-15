@@ -43,10 +43,20 @@ public class CartController {
 		return new ResponseEntity<Cart>(cart, HttpStatus.OK);
 	}
 	
-	@PostMapping(path="update-cart")
-	public ResponseEntity<CartLine> addProductToCart(@RequestParam long cartId, @RequestBody Product product, @RequestParam int quantity){
-		return new ResponseEntity<CartLine>(this.cartService.updateCart(cartId, product, quantity),HttpStatus.OK);
+	@GetMapping(path="update-cart-test")
+	public ResponseEntity<CartLine> addProductToCart(){
+		return new ResponseEntity<CartLine>(this.cartService.updateCart(1, 2),HttpStatus.OK);
 	}
+	
+	@PostMapping(path="add-cart-line/{id}")
+	public ResponseEntity<CartLine> addCartLine(@PathVariable long id) {
+		return new ResponseEntity<CartLine>(this.cartService.addCartLine(id),HttpStatus.OK);
+	}
+	
+//	@PostMapping(path="update-cart")
+//	public ResponseEntity<CartLine> addProductToCart(@RequestParam long cartId, @RequestBody Product product, @RequestParam int quantity){
+//		return new ResponseEntity<CartLine>(this.cartService.updateCart(cartId, product, quantity),HttpStatus.OK);
+//	}
 	
 	
 	

@@ -1,5 +1,6 @@
 package serverapp.onlineshop.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -37,17 +38,20 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public CartLine updateCart(long cartId, Product product, int quantity) {
-		List<CartLine> lines = this.cartLineRepository.findCartLineByCartId(cartId);
-		lines.stream().forEach(l -> System.out.println(l));
-		System.out.println(lines.iterator().next());
-//		for (CartLine line : lines) {
+	public CartLine updateCart(long cartId, int quantity) {
+//		List<CartLine> lines = this.cartLineRepository.findCartLineByCartId(cartId);
+		List<CartLine> lines = this.cartLineRepository.findCartLineByQuantity(5);
+//		ArrayList<CartLine> lines = this.cartLineRepository.findByQuantity(0);
+//		CartLine c = this.cartLineRepository.getById(1L);
+		
+		for (CartLine line : lines) {
 //			if(line.getProduct().getId() == product.getId()) {
 //				line.setProductCount(line.getProductCount() + quantity);
 //				this.cartLineRepository.save(line);
 //				return line;
 //			}
-//		}
+			System.out.println(line);
+		}
 		return new CartLine();
 //		return createCartLine(cartId, product, quantity);
 	}
@@ -57,8 +61,13 @@ public class CartServiceImpl implements CartService{
 		CartLine newCarLine = new CartLine();
 		newCarLine.setCart(cart);
 		newCarLine.setProduct(product);
-		newCarLine.setProductCount(quantity);
+		newCarLine.setQuantity(quantity);
 		return this.cartLineRepository.save(newCarLine);
+	}
+
+	@Override
+	public CartLine addCartLine(long id) {
+		return this.cartLineRepository.save(new CartLine(id,5));
 	}
 
 	
