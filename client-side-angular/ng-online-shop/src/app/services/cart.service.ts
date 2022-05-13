@@ -10,16 +10,94 @@ import { IProduct } from '../models/IProduct.interface';
 })
 export class CartService {
 
+private currentCart:ICart = {
+    cartId: 0,
+    user:{
+          id:0,
+          userName:"",
+          email:"",
+          password:"",
+          isAdmin:false
+        },
+    cartLines:[],
+    total:0
+  }
+
+  // private currentCart:ICart = {
+  //   cartId: 12,
+  //   user:{
+  //     id:0,
+  //     userName:"or",
+  //     email:"or@gmail.com",
+  //     password:"111",
+  //     isAdmin:false
+  //   },
+  //   cartLines:[
+  //     {
+  //       cartLineId:1,
+  //       product:{
+  //       id:5,
+  //       description:"gdsfgds",
+  //       price:300,
+  //       category:"T-Shirt",
+  //       imageUrl:"http://i.imgur.com/qqBRWD5.jpg" 
+  //       },
+  //       quantity:5
+  //     },
+  //     {
+  //       cartLineId:1,
+  //       product:{
+  //       id:5,
+  //       description:"gdsfgds",
+  //       price:300,
+  //       category:"T-Shirt",
+  //       imageUrl:"http://i.imgur.com/qqBRWD5.jpg" 
+  //       },
+  //       quantity:5
+  //     }
+  //   ],
+  //   total:3000
+  // }
+
   constructor(public http: HttpClient) { }
+
+  isCartExists() :boolean{
+    if(this.currentCart.cartId != 0) return true;
+    else return false; 
+  }
+
+  getCurrentCart() :ICart{
+    return this.currentCart;
+  }
+
+  setCurrentCart(currentCart: ICart) {
+    this.currentCart = currentCart;
+  }
+
+  resetCurrentCart() {
+    this.currentCart = {
+      cartId: 0,
+      user:{
+            id:0,
+            userName:"",
+            email:"",
+            password:"",
+            isAdmin:false
+          },
+      cartLines:[],
+      total:0
+    }
+  }
 
   updateCart(cart:any, product:any, quantity: any) {
 
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("cartId",cart);
+    queryParams = queryParams.append("cartId",cart.cartId);
+    queryParams = queryParams.append("productId",product.productId);
     queryParams = queryParams.append("quantity",quantity);
 
-    const uri = HTTP_URI + "update-cart";
-    return this.http.put<IProduct>(uri, product, {params: queryParams});
+    const uri = HTTP_URI + "update-cart-test";
+    return this.http.put<ICart>(uri, product, {params: queryParams});
   }
 
   getOrCreateCart(userId: number) :Observable<ICart>{
@@ -31,28 +109,26 @@ export class CartService {
     if(!cartId){
       this.getOrCreateCart(userId).subscribe(data => {
         sessionStorage.setItem('cartId',data.cartId.toString())
-      },
-      error=> {
-        console.log(error);
       })
     }
   }
 
- addProductToCart(product: IProduct, userId: number) { 
-  let cartId = sessionStorage.getItem('cartId'); 
-  if(cartId){
-    this.updateCart(parseInt(cartId),product,1).subscribe(
+  // getCartById(cartId: number) {
+  //   let cartId = sessionStorage.getItem('cartId');
+  //   if(!cartId){
+  //     this.getOrCreateCart(userId).subscribe(data => {
+  //       sessionStorage.setItem('cartId',data.cartId.toString())
+  //     })
+  //   }
+  // }
+
+ addProductToCart(product: IProduct) { 
+    if(this.isCartExists()) this.updateCart(this.currentCart.cartId,product,1).subscribe(
       data => {
-        console.log(data)
-      },
-      error => {
-        console.log(error)
+        this.currentCart = data
       }
-      )
-  }
-    
-    
-  }
+    )
+ }
 }
   
 

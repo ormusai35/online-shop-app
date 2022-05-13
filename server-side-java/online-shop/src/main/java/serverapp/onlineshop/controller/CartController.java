@@ -1,5 +1,7 @@
 package serverapp.onlineshop.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import serverapp.onlineshop.model.CartLine;
 import serverapp.onlineshop.model.Product;
 import serverapp.onlineshop.model.User;
 import serverapp.onlineshop.service.CartService;
+import serverapp.onlineshop.service.ProductService;
 import serverapp.onlineshop.service.UserService;
 
 @CrossOrigin(origins="http://localhost:4200/")
@@ -28,10 +31,13 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
+	@Autowired
+	private ProductService productService;
+	
 	@GetMapping(path="get-cart-by-user/{userId}")
 	public ResponseEntity<Cart> getOrCreateCart(@PathVariable Long userId) {
 		Cart cart;
-		User user = this.userService.getUserById(userId);		
+		User user = this.userService.getUserById(userId);	
 		if (user == null) 
 			cart = this.cartService.createCart(user);
 		else {
@@ -44,8 +50,12 @@ public class CartController {
 	}
 	
 	@GetMapping(path="update-cart-test")
-	public ResponseEntity<CartLine> addProductToCart(){
-		return new ResponseEntity<CartLine>(this.cartService.updateCart(1, 2),HttpStatus.OK);
+	public ResponseEntity<Cart> addProductToCart(@RequestParam Long cartId, @RequestParam Long productId, @RequestParam Integer quantity){
+		
+		Cart cart = this.cartService.getCart(cartId);
+		Product product = this.productService.getProductById(productId);
+		
+		return new ResponseEntity<Cart>(this.cartService.updateCart(cart, product, quantity),HttpStatus.OK);
 	}
 	
 	@PostMapping(path="add-cart-line/{id}")
@@ -58,10 +68,8 @@ public class CartController {
 //		return new ResponseEntity<CartLine>(this.cartService.updateCart(cartId, product, quantity),HttpStatus.OK);
 //	}
 	
-	
-	
-//	@GetMapping(path="get-cart/test")
-//	public Cart getCart() {
-//		return this.cartService.getCart();
-//	}
+	@GetMapping(path="get-carts/test")
+	public List<Cart> getCart() {
+		return this.cartService.getCarts();
+	}
 }

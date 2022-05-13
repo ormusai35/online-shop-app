@@ -34,35 +34,35 @@ public class CartServiceImpl implements CartService{
 
 	@Override
 	public Cart getCart(Long cartId) {
-		return this.cartRepository.getById(cartId);
+		return this.cartRepository.findByCartId(cartId);
 	}
 
 	@Override
-	public CartLine updateCart(long cartId, int quantity) {
-//		List<CartLine> lines = this.cartLineRepository.findCartLineByCartId(cartId);
-		List<CartLine> lines = this.cartLineRepository.findCartLineByQuantity(5);
-//		ArrayList<CartLine> lines = this.cartLineRepository.findByQuantity(0);
-//		CartLine c = this.cartLineRepository.getById(1L);
+	public Cart updateCart(Cart cart, Product product, int quantity) {
 		
-		for (CartLine line : lines) {
-//			if(line.getProduct().getId() == product.getId()) {
-//				line.setProductCount(line.getProductCount() + quantity);
-//				this.cartLineRepository.save(line);
-//				return line;
-//			}
-			System.out.println(line);
+		List<CartLine> cartLines = cart.getCartLines();
+		System.out.println(cartLines);
+		for (CartLine c : cartLines) {
+			if(product.getId() == c.getProduct().getId()) {
+				c.setQuantity(c.getQuantity() + quantity);
+				cart.setTotal(cart.getTotal() + product.getPrice());
+//				cart.setCartLines(cartLines);
+				return cart;
+			}
 		}
-		return new CartLine();
-//		return createCartLine(cartId, product, quantity);
+		
+		insertIntoCartLine(cart, product, quantity);
+		return cart;
+		
 	}
 	
-	private CartLine createCartLine(long cartId, Product product, int quantity) {
-		Cart cart = this.cartRepository.getById(cartId);
+	private void insertIntoCartLine(Cart cart, Product product, int quantity) {
 		CartLine newCarLine = new CartLine();
-		newCarLine.setCart(cart);
 		newCarLine.setProduct(product);
 		newCarLine.setQuantity(quantity);
-		return this.cartLineRepository.save(newCarLine);
+		newCarLine.setCart(cart);
+		cart.setTotal(cart.getTotal() + product.getPrice());
+		this.cartLineRepository.save(newCarLine);
 	}
 
 	@Override
@@ -70,7 +70,28 @@ public class CartServiceImpl implements CartService{
 		return this.cartLineRepository.save(new CartLine(id,5));
 	}
 
-	
-
-
+	@Override
+	public List<Cart> getCarts() {
+		return this.cartRepository.findAll();
+	}
 }
+
+
+
+
+
+//List<CartLine> lines = this.cartLineRepository.findCartLineByCartId(cartId);
+//List<CartLine> lines = this.cartLineRepository.findCartLineByQuantity(5);
+//ArrayList<CartLine> lines = this.cartLineRepository.findByQuantity(0);
+//CartLine c = this.cartLineRepository.getById(1L);
+
+//for (CartLine line : lines) {
+//	if(line.getProduct().getId() == product.getId()) {
+//		line.setProductCount(line.getProductCount() + quantity);
+//		this.cartLineRepository.save(line);
+//		return line;
+//	}
+//	System.out.println(line);
+//}
+//return new CartLine();
+//return createCartLine(cartId, product, quantity);

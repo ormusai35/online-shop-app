@@ -49,6 +49,7 @@ public class UserController {
 			return new ResponseEntity<User>(this.userService.checkPassword(email,password),HttpStatus.BAD_REQUEST);
 		}
 	}
+
 	
 	@PostMapping(path = "user-sign-up")
 	public ResponseEntity<User> signUp(@RequestBody User user) {

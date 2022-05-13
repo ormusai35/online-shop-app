@@ -30,8 +30,9 @@ public class CartLine implements Serializable {
 	@Column(name="line_id")
 	private Long lineId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="cart_id")
+	@JsonIgnore
 	private Cart cart;
 	
 	@OneToOne
@@ -84,5 +85,4 @@ public class CartLine implements Serializable {
 		return "CartLine [lineId=" + lineId + ", cart=" + cart + ", product=" + product + ", quantity="
 				+ quantity + "]";
 	}
-	
 }

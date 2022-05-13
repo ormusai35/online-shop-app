@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AUTHENTICATE_USER, HTTP_URI } from '../constants/app.constants';
 import { IUser } from '../models/IUser.interface';
+import { filter, map } from 'rxjs/operators'; 
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +19,9 @@ export class UserService {
     isAdmin: false
   }
 
-  admins = new Set<string>(["ormusai35@gmail.com"]);
+  admins = new Set<string>(["ormusai@gmail.com"]);
 
-  constructor(public http: HttpClient) { }
+  constructor(public cartService:CartService, public http: HttpClient) { }
 
   isUserLogin(): boolean {
     return (sessionStorage.getItem(AUTHENTICATE_USER) != null);
@@ -37,6 +39,7 @@ export class UserService {
       password: "",
       isAdmin: false
     }
+    this.cartService.resetCurrentCart();
   }
 
   getUsers(): Observable<IUser[]> {

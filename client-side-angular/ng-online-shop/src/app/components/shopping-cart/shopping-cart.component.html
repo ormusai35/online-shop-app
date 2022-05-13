@@ -1,1 +1,31 @@
+<div class="cart_section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="cart_container">
+                    <div class="cart_title">My Shopping Cart <!--<small> ( {{}} items in your cart) </small> -->
+                    </div>
+                    <div class="cart_items">
+                        <ul class="cart_list">
+                            <li class="cart_item clearfix" *ngFor="let line of cartService.getCurrentCart().cartLines">
+                                <app-product-in-cart [cartLine]="line"></app-product-in-cart>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="order_total">
+                        <div class="order_total_title" *ngIf="cartService.getCurrentCart().cartLines.length == 0">your shopping cart is empty</div>
+                        <div class="order_total_content text-md-right" *ngIf="cartService.getCurrentCart().cartLines.length != 0">
+                            <div class="order_total_title">Order Total:</div>
+                            <div class="order_total_amount">{{ cartService.getCurrentCart().total | currency}}</div>
+                        </div>
+                    </div>
+                    <div class="cart_buttons"> 
+                        <!-- <button type="button" class="button cart_button_clear" routerLink="../products">Continue Shopping</button>  -->
+                        <!-- <button type="button" class="button cart_button_checkout" >Add to Cart</button> </div> -->
 
+                        <button type="button" class="button cart_button_checkout" routerLink="../products">Continue Shopping</button> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

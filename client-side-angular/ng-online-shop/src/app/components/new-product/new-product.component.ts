@@ -44,6 +44,7 @@ export class NewProductComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.route.snapshot.paramMap.get("id"))
   }
 
   saveProduct(formProduct: FormGroup){

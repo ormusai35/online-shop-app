@@ -15,6 +15,8 @@ public interface CartRepository extends JpaRepository<Cart,Long>{
 //	@Query("from Cart c where c.user_id = :id")
 //	List<Cart> findByUserId(@Param("id") long id);
 
+	Cart findByCartId(long id);
+	
 	Collection<Cart> findByUser(User user);
 	
 	Collection<Cart> findByTotal(double totalPrice);

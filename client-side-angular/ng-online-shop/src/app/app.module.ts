@@ -16,7 +16,6 @@ import { NewProductComponent } from './components/new-product/new-product.compon
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ProductsService } from './services/products.service';
@@ -24,21 +23,11 @@ import { ProductFilterComponent } from './components/products/product-filter/pro
 import { ProductCardComponent } from './components/products/product-card/product-card.component';
 import { CartService } from './services/cart.service';
 import { FooterComponent } from './components/footer/footer.component';
+import { RouteGuardService } from './services/route-guard.service';
+import { RouteGaurd } from './guards/route.guard';
+import { ProductInCartComponent } from './components/product-in-cart/product-in-cart.component';
 
-const appRoutes:Routes = [
-  {path:'',component:HomePageComponent},
-  {path:'shoppingcart',component:ShoppingCartComponent},
-  {path:'products',component:ProductsComponent},
-  {path:'myorders',component:UserOrdersComponent}, //, canActivate:[RouteguardService]},
-  {path:'check-out',component:CheckoutComponent}, //, canActivate:[RouteguardService]},
-  {path:'login',component:LoginComponent},
-  {path:'login/signup',component:SignUpComponent},
-  {path:'admin/products',component:AdminProductsComponent}, //, canActivate:[RouteguardService,AdminGaurdService]},
-  {path:'admin/products/new',component:NewProductComponent}, //, canActivate:[RouteguardService,AdminGaurdService]},
-  {path:'admin/products/:id',component:NewProductComponent}, //, canActivate:[RouteguardService,AdminGaurdService]},
-  {path:'admin/orders',component:AdminOrdersComponent},  //,canActivate:[RouteguardService,AdminGaurdService]},
-  {path:'**',component:ErrorComponent}
-]
+
 
 @NgModule({
   declarations: [
@@ -52,22 +41,22 @@ const appRoutes:Routes = [
     UserOrdersComponent,
     AdminOrdersComponent,
     AdminProductsComponent,
-    CheckoutComponent,
+    // CheckoutComponent,
     ProductsComponent,
     ShoppingCartComponent,
     ProductFilterComponent,
     ProductCardComponent,
-    FooterComponent
+    FooterComponent,
+    ProductInCartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes),
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [UserService,ProductsService,CartService],
+  providers: [UserService,ProductsService,CartService,RouteGaurd],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

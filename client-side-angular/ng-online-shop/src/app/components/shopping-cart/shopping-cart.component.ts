@@ -1,6 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
+import { ICart } from 'src/app/models/ICart.interface';
 import { CartService } from 'src/app/services/cart.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,10 +11,20 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor(private cartService:CartService) { }
-
+  constructor(public cartService:CartService, private userService:UserService) { }
 
   ngOnInit(): void {
+    
+    // if(!this.cartService.isCartExists()){
+      this.cartService.getOrCreateCart(this.userService.getUser().id).subscribe(
+        data => {
+          this.cartService.setCurrentCart(data);
+        }
+      );
+    // }
+    setTimeout(()=>{ 
+      console.log(this.userService.getUser().id);
+      console.log(this.cartService.getCurrentCart())
+    },5000);
   }
-
 }

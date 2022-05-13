@@ -1,6 +1,7 @@
 package serverapp.onlineshop.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ public class Cart implements Serializable{
 	@OneToOne
 	private User user;
 	
-	@JsonIgnore
+//	@Transient
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
 	@Column(name = "cart_lines")
 	private List<CartLine> cartLines;
@@ -40,10 +41,13 @@ public class Cart implements Serializable{
 	@Column(name = "total")
 	private double total;
 	
-	public Cart() {}
+	public Cart() {
+		this.cartLines = new ArrayList<CartLine>(); 
+	}
 	
 	public Cart(User user) {
 		this.user = user;
+		this.cartLines = new ArrayList<CartLine>();
 	}
 	
 	public Long getCartId() {

@@ -1,7 +1,9 @@
+import { CartLine } from "./CartLine";
 import { IUser } from "./IUser.interface";
 
 export class ICart {
-    cartId: number;
+    cartId:number;
     user:IUser;
-    total:number
+    cartLines:Array<CartLine>;
+    total:number;
 }
