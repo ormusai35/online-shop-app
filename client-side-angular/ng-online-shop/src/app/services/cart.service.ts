@@ -89,15 +89,15 @@ private currentCart:ICart = {
     }
   }
 
-  updateCart(cart:any, product:any, quantity: any) {
+  updateCart(cart:ICart, productId:number, quantity: number) {
 
     let queryParams = new HttpParams();
     queryParams = queryParams.append("cartId",cart.cartId);
-    queryParams = queryParams.append("productId",product.productId);
+    queryParams = queryParams.append("productId",productId);
     queryParams = queryParams.append("quantity",quantity);
 
-    const uri = HTTP_URI + "update-cart-test";
-    return this.http.put<ICart>(uri, product, {params: queryParams});
+    const uri = HTTP_URI + "update-cart";
+    return this.http.put<ICart>(uri,cart, {params: queryParams});
   }
 
   getOrCreateCart(userId: number) :Observable<ICart>{
@@ -122,10 +122,13 @@ private currentCart:ICart = {
   //   }
   // }
 
- addProductToCart(product: IProduct) { 
-    if(this.isCartExists()) this.updateCart(this.currentCart.cartId,product,1).subscribe(
+ addProductToCart(productId: number) { 
+   console.log("1",this.currentCart)
+    if(this.isCartExists()) this.updateCart(this.currentCart,productId,1).subscribe(
       data => {
+        console.log(data)
         this.currentCart = data
+
       }
     )
  }

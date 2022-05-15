@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,24 +50,20 @@ public class CartController {
 		return new ResponseEntity<Cart>(cart, HttpStatus.OK);
 	}
 	
-	@GetMapping(path="update-cart-test")
-	public ResponseEntity<Cart> addProductToCart(@RequestParam Long cartId, @RequestParam Long productId, @RequestParam Integer quantity){
+	@PutMapping(path="update-cart")
+	public ResponseEntity<Cart> addProductToCart(@RequestBody Cart requestCart, @RequestParam Long productId, @RequestParam Integer quantity){
 		
-		Cart cart = this.cartService.getCart(cartId);
 		Product product = this.productService.getProductById(productId);
+		this.cartService.updateCart(requestCart, product, quantity);
+		Cart responseCart = this.cartService.getCart(requestCart.getCartId());
 		
-		return new ResponseEntity<Cart>(this.cartService.updateCart(cart, product, quantity),HttpStatus.OK);
+		return new ResponseEntity<Cart>(responseCart,HttpStatus.OK);
 	}
 	
 	@PostMapping(path="add-cart-line/{id}")
 	public ResponseEntity<CartLine> addCartLine(@PathVariable long id) {
 		return new ResponseEntity<CartLine>(this.cartService.addCartLine(id),HttpStatus.OK);
 	}
-	
-//	@PostMapping(path="update-cart")
-//	public ResponseEntity<CartLine> addProductToCart(@RequestParam long cartId, @RequestBody Product product, @RequestParam int quantity){
-//		return new ResponseEntity<CartLine>(this.cartService.updateCart(cartId, product, quantity),HttpStatus.OK);
-//	}
 	
 	@GetMapping(path="get-carts/test")
 	public List<Cart> getCart() {

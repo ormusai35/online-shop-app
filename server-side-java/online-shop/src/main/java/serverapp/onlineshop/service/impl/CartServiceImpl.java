@@ -1,9 +1,8 @@
 package serverapp.onlineshop.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,22 +37,24 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public Cart updateCart(Cart cart, Product product, int quantity) {
+	public void updateCart(Cart cart, Product product, int quantity) {
 		
 		List<CartLine> cartLines = cart.getCartLines();
 		System.out.println(cartLines);
+		
 		for (CartLine c : cartLines) {
 			if(product.getId() == c.getProduct().getId()) {
 				c.setQuantity(c.getQuantity() + quantity);
 				cart.setTotal(cart.getTotal() + product.getPrice());
-//				cart.setCartLines(cartLines);
-				return cart;
+				c.setCart(cart);
+				
+				this.cartLineRepository.save(c);
+				this.cartRepository.save(cart);
+				return;
 			}
 		}
 		
 		insertIntoCartLine(cart, product, quantity);
-		return cart;
-		
 	}
 	
 	private void insertIntoCartLine(Cart cart, Product product, int quantity) {
@@ -63,6 +64,7 @@ public class CartServiceImpl implements CartService{
 		newCarLine.setCart(cart);
 		cart.setTotal(cart.getTotal() + product.getPrice());
 		this.cartLineRepository.save(newCarLine);
+		this.cartRepository.save(cart);
 	}
 
 	@Override
@@ -75,23 +77,3 @@ public class CartServiceImpl implements CartService{
 		return this.cartRepository.findAll();
 	}
 }
-
-
-
-
-
-//List<CartLine> lines = this.cartLineRepository.findCartLineByCartId(cartId);
-//List<CartLine> lines = this.cartLineRepository.findCartLineByQuantity(5);
-//ArrayList<CartLine> lines = this.cartLineRepository.findByQuantity(0);
-//CartLine c = this.cartLineRepository.getById(1L);
-
-//for (CartLine line : lines) {
-//	if(line.getProduct().getId() == product.getId()) {
-//		line.setProductCount(line.getProductCount() + quantity);
-//		this.cartLineRepository.save(line);
-//		return line;
-//	}
-//	System.out.println(line);
-//}
-//return new CartLine();
-//return createCartLine(cartId, product, quantity);

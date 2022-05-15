@@ -13,14 +13,10 @@ public interface CartService {
 
 	Cart getCart(Long cartId);
 
-	Cart updateCart(Cart cart, Product priduct, int quantity);
+	void updateCart(Cart cart, Product priduct, int quantity);
 
 	CartLine addCartLine(long id);
 
 	List<Cart> getCarts();
-
-//	Collection<Cart> getOrCreateCart(User user);
-//
-//	Cart getCart();
 	
 }
