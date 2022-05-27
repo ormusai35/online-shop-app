@@ -33,14 +33,21 @@ export class SignUpComponent implements OnInit {
     this.userService.signUp(this.sigunUpUser).subscribe(
       data => {
         if (data != null){
-          // this.userService.setUser(data);
-          // sessionStorage.setItem('authenticaterUser',data.userName);
           this.invalidLogin = true;
           this.router.navigate(['']);
         }
         else {
           this.invalidLogin = false;
         }
+      },
+      error => {
+        console.log(error)
+        if(error.error.text){
+          window.alert(error.error.text);
+        } else {
+          window.alert(error.error.errors[0].defaultMessage);
+        }
+        
       }
     );
   }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import serverapp.onlineshop.exception.UserAlreadyExistsException;
 import serverapp.onlineshop.model.User;
 import serverapp.onlineshop.repository.UserRepository;
 import serverapp.onlineshop.service.UserService;
@@ -32,11 +33,11 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public User insertUser(User user){
-		if(this.userRepository.existsById(user.getId())) return null;
-		else {
+	public User insertUser(User user) throws UserAlreadyExistsException {
+		if(this.userRepository.existsByEmail(user.getEmail()))
+			throw new UserAlreadyExistsException("User Email Already exists!");
+		else 
 			return this.userRepository.save(user);
-		}
 	}
 
 	@Override

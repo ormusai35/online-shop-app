@@ -10,17 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import serverapp.onlineshop.exception.UserAlreadyExistsException;
 import serverapp.onlineshop.exception.UserNotFoundException;
 import serverapp.onlineshop.model.User;
 import serverapp.onlineshop.service.UserService;
+import serverapp.onlineshop.validator.PasswordValidator;
 
 @CrossOrigin(origins="http://localhost:4200/")
 @RestController 
@@ -29,6 +34,9 @@ public class UserController {
 	private static Logger LOG = LoggerFactory.getLogger(UserController.class);
 	
 	private UserService userService;
+	
+	@Autowired
+	private PasswordValidator passwordValidator;
 	
 	@Autowired
 	public UserController(UserService userService) {
@@ -52,19 +60,29 @@ public class UserController {
 
 	
 	@PostMapping(path = "user-sign-up")
-	public ResponseEntity<User> signUp(@RequestBody User user) {
-		try {
-			return ResponseEntity.ok(this.userService.insertUser(user));
-		} catch(Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+	public ResponseEntity<User> signUp(@Validated @RequestBody User user) {
+		return ResponseEntity.ok(this.userService.insertUser(user));
 	}
 	
-	@ExceptionHandler(UserNotFoundException.class)
-	public String handleNotFoundUserException(Model model, UserNotFoundException exception, HttpServletRequest request) {
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		System.out.println();
+		binder.addValidators(passwordValidator);
+	}
+	
+	@ExceptionHandler(RuntimeException.class)
+	public String handleNotFoundUserException(Model model, RuntimeException exception, HttpServletRequest request) {
+		return ExceptionExecutor(model,exception,request);
+	}
+	
+//	@ExceptionHandler(UserAlreadyExistsException.class)
+//	public String handleUserAlradyExistsException(Model model, RuntimeException exception, HttpServletRequest request) {
+//		return ExceptionExecutor(model,exception,request);
+//	}
+	
+	private String ExceptionExecutor(Model model, RuntimeException exception, HttpServletRequest request) {
 		model.addAttribute("exception", exception);
 		model.addAttribute("url", request.getRequestURL());
-		
-		return exception.getMessage();
+		return exception.getMessage(); 
 	}
 }

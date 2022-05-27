@@ -15,13 +15,12 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     
-    // if(!this.cartService.isCartExists()){
-      this.cartService.getOrCreateCart(this.userService.getUser().id).subscribe(
-        data => {
-          this.cartService.setCurrentCart(data);
-        }
-      );
-    // }
+    this.cartService.getOrCreateCart(this.userService.getUser().id).subscribe(
+      data => {
+        this.cartService.setCurrentCart(data);
+      }
+    );
+    
     setTimeout(()=>{ 
       console.log(this.userService.getUser().id);
       console.log(this.cartService.getCurrentCart())

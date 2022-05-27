@@ -2,7 +2,6 @@ package serverapp.onlineshop.service.impl;
 
 import java.util.List;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,22 +38,46 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public void updateCart(Cart cart, Product product, int quantity) {
 		
-		List<CartLine> cartLines = cart.getCartLines();
-		System.out.println(cartLines);
-		
-		for (CartLine c : cartLines) {
-			if(product.getId() == c.getProduct().getId()) {
-				c.setQuantity(c.getQuantity() + quantity);
-				cart.setTotal(cart.getTotal() + product.getPrice());
-				c.setCart(cart);
-				
-				this.cartLineRepository.save(c);
-				this.cartRepository.save(cart);
-				return;
-			}
+		if(cart.getCartLines().stream()
+				.anyMatch(c -> c.getProduct().getId() == product.getId()))
+		{
+			System.out.println("!!!!!!!!!!!! update !!!!!!!!!!!!!");
+			updateQuantityInCart(cart, product, quantity);
+		} 
+		else 
+		{
+			System.out.println("!!!!!!!!!!!! insert !!!!!!!!!!!!!");
+			insertIntoCartLine(cart, product, quantity);
 		}
 		
-		insertIntoCartLine(cart, product, quantity);
+		
+		
+//		for (CartLine c : cartLines) {
+//			if(product.getId() == c.getProduct().getId()) {
+//				c.setQuantity(c.getQuantity() + quantity);
+//				cart.setTotal(cart.getTotal() + product.getPrice());
+//				c.setCart(cart);
+//				
+//				this.cartLineRepository.save(c);
+//				this.cartRepository.save(cart);
+//				return;
+//			}
+//		}
+		
+	}
+	
+	private void updateQuantityInCart(Cart cart, Product product, int quantity) {
+		List<CartLine> cartLines = cart.getCartLines();
+		
+		cartLines.stream()
+		.filter((c)-> c.getProduct().getId() == product.getId())
+		.forEach(c -> {
+			c.setQuantity(c.getQuantity() + quantity);
+			cart.setTotal(cart.getTotal() + product.getPrice());
+			c.setCart(cart);
+			this.cartLineRepository.save(c);
+			this.cartRepository.save(cart);
+	});
 	}
 	
 	private void insertIntoCartLine(Cart cart, Product product, int quantity) {
